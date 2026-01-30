@@ -34,13 +34,17 @@ export async function workflow(productName: string, productDescription: string):
         const labelTrimmed = label.trim();
         const descriptionTrimmed = description.trim();
         entries.push({ label: labelTrimmed, description: descriptionTrimmed });
+    }
 
+    const promises = entries.map(async ({ label: labelTrimmed, description: descriptionTrimmed }) => {
         console.log(`[workflow] Processing image: ${labelTrimmed}`);
         await generateImage(descriptionTrimmed, labelTrimmed);
         console.log(`[workflow] Generating voiceover text for: ${labelTrimmed}`);
         const voiceoverText = await generateProductImageVoiceoverText(productName, descriptionTrimmed);
         await generateVoiceover(voiceoverText, labelTrimmed);
-    }
+    });
+
+    await Promise.all(promises);
 
     const jsonPath = `assets/${productName}.json`;
     await Bun.write(jsonPath, JSON.stringify(entries, null, 2) + "\n");
@@ -56,8 +60,16 @@ if (false) {
     const productDescription = await prompt("Product description: ");
     await workflow(productName, productDescription);
 } else {
+    // await workflow(
+    //     "Decanter",
+    //     "The Aether-Glass Decanter is a delicate, crystalline vessel that does not hold wine, but rather distilled memories harvested from the dreams of sleeping giants. When poured into a goblet, the liquid shimmers with the exact sensory experience of the memory, allowing the drinker to feel the wind of ancient mountain peaks or the warmth of a sun that set centuries ago. However, the decanter replenishes itself only when left in total darkness, absorbing the ambient silence of the room to brew new draughts of forgotten history. It is a prized artifact for historians and thrill-seekers alike, offering a literal taste of the past that is as intoxicating as it is educational."
+    // );
+    // await workflow(
+    //     "Crystal-blossom-Nectar-Pear",
+    //     "Crystal-blossom Nectar-Pear is a translucent, bioluminescent fruit grown only in the frost-tipped orchards of the Ethereal Highlands. When sliced open, the core releases a swirling mist that tastes of forgotten childhood memories and chilled elderflower wine. The skin is composed of delicate, edible sugar-crystals that hum a soft, resonant frequency as they dissolve on your tongue. Consuming the fruit grants the eater a temporary ability to see the shimmering ley lines of magic woven into the natural world."
+    // );
     await workflow(
-        "Decanter",
-        "The Aether-Glass Decanter is a delicate, crystalline vessel that does not hold wine, but rather distilled memories harvested from the dreams of sleeping giants. When poured into a goblet, the liquid shimmers with the exact sensory experience of the memory, allowing the drinker to feel the wind of ancient mountain peaks or the warmth of a sun that set centuries ago. However, the decanter replenishes itself only when left in total darkness, absorbing the ambient silence of the room to brew new draughts of forgotten history. It is a prized artifact for historians and thrill-seekers alike, offering a literal taste of the past that is as intoxicating as it is educational."
+        "football-boot",
+        "A football boot with a unique design"
     );
 }
