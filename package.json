@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@elevenlabs/elevenlabs-js": "^2.33.0",
+    "@google/genai": "^1.38.0",
     "react": "^19",
     "react-dom": "^19",
     "zod": "^4.3.6"
