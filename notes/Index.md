@@ -15,6 +15,8 @@ The frontend is simply a viewer for these assets. The frontend does the followin
 
 ## Implemenation Ntoes
 
+The workflow should be generated in 
+
 Use `generateImage` from `src/generate_image.ts` to generate images.
 
 Use `generateVoiceover` from `src/generate_voiceover` to generate voiceovers.
