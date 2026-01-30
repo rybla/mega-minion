@@ -1,4 +1,4 @@
-import { GenerateContentParameters, GoogleGenAI } from "@google/genai";
+import { type GenerateContentParameters, GoogleGenAI } from "@google/genai";
 
 const genAi = new GoogleGenAI({
     apiKey: process.env.GENAI_API_KEY,
