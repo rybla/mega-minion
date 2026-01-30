@@ -57,7 +57,7 @@ if (false) {
     await workflow(productName, productDescription);
 } else {
     await workflow(
-        "Flask",
-        "The Flask of Bottled Momentum is a heavy, alchemical vial designed to capture and store the kinetic energy of any object that comes to a sudden halt against its glass surface. A user can swing the flask wildly through the air or catch a falling stone with it, trapping that force inside the vessel as a swirling, pressurized vapor. When the wax seal is finally broken, the stored motion erupts outward in an invisible, directed blast, capable of shattering iron locks or launching arrows without a bow. Thieves and duelists prize it highly, though they must handle it with care, as a cracked flask will violently unleash weeks of stored impact in a single, catastrophic instant."
+        "Decanter",
+        "The Aether-Glass Decanter is a delicate, crystalline vessel that does not hold wine, but rather distilled memories harvested from the dreams of sleeping giants. When poured into a goblet, the liquid shimmers with the exact sensory experience of the memory, allowing the drinker to feel the wind of ancient mountain peaks or the warmth of a sun that set centuries ago. However, the decanter replenishes itself only when left in total darkness, absorbing the ambient silence of the room to brew new draughts of forgotten history. It is a prized artifact for historians and thrill-seekers alike, offering a literal taste of the past that is as intoxicating as it is educational."
     );
 }
