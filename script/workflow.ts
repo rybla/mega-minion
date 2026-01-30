@@ -23,18 +23,29 @@ export async function workflow(productName: string, productDescription: string):
     const labeledDescriptions = await generateProductImageDescriptions(productName, productDescription);
     console.log(`[workflow] Got ${labeledDescriptions.length} image description(s)`);
 
+    const entries: Array<{ label: string; description: string }> = [];
+
     for (const labeledDescription of labeledDescriptions) {
         const [label, description] = labeledDescription.split(":");
         if (!label || !description) {
             console.warn(`[workflow] Skipping malformed description: ${labeledDescription}`);
             continue;
         }
-        console.log(`[workflow] Processing image: ${label.trim()}`);
-        await generateImage(description.trim(), label.trim());
-        console.log(`[workflow] Generating voiceover text for: ${label.trim()}`);
-        const voiceoverText = await generateProductImageVoiceoverText(productName, description.trim());
-        await generateVoiceover(voiceoverText, label.trim());
+        const labelTrimmed = label.trim();
+        const descriptionTrimmed = description.trim();
+        entries.push({ label: labelTrimmed, description: descriptionTrimmed });
+
+        console.log(`[workflow] Processing image: ${labelTrimmed}`);
+        await generateImage(descriptionTrimmed, labelTrimmed);
+        console.log(`[workflow] Generating voiceover text for: ${labelTrimmed}`);
+        const voiceoverText = await generateProductImageVoiceoverText(productName, descriptionTrimmed);
+        await generateVoiceover(voiceoverText, labelTrimmed);
     }
+
+    const jsonPath = `assets/${productName}.json`;
+    await Bun.write(jsonPath, JSON.stringify(entries, null, 2) + "\n");
+    console.log(`[workflow] Wrote ${entries.length} entries to ${jsonPath}`);
+
     console.log("[workflow] Done");
 }
 
