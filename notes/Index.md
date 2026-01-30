@@ -13,15 +13,19 @@ The frontend is simply a viewer for these assets. The frontend does the followin
 - Load the JSON for a product, which is specified by a URL search parameter for `product_name`, which loads all the ad labels.
 - Show one ad image for the product at a time and plays the associated voiceover. When the voiceover finishes, shows the next ad image.
 
-## Implemenation Ntoes
+## Implemenation Notes
 
-The workflow should be generated in 
+The workflow should be implemented in `src/script/workflow.ts`
+
+Use `generateProductImageDescriptions` from `src/generate_product_image_descriptions.ts` to generate images.
 
 Use `generateImage` from `src/generate_image.ts` to generate images.
 
-Use `generateVoiceover` from `src/generate_voiceover` to generate voiceovers.
+Use `generateProductImageVoiceoverText` from `src/genegenerate_product_image_voiceover.ts` to generate the product image voiceover text.
 
-Store all assets in `assets/`.
+Use `generateVoiceover` from `src/generate_voiceover` to generate voiceover audio.
+
+All assets must be stored to `assets/`.
 
 Add GET endpoints to `index.ts` for fetching the generated assets.
 
