@@ -1,0 +1,5 @@
+---
+alwaysApply: true
+---
+
+You must always run `bun run validate` before submitting your changes. Then, if there any validation steps fail, you must address those failures before finalizing your changes.
