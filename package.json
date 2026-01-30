@@ -6,7 +6,8 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --fix",
-    "dev": "bun --hot src/index.ts"
+    "dev": "bun --hot src/index.ts",
+    "validate": "bun run script/validate.ts"
   },
   "peerDependencies": {
     "eslint": "^9.39.2",
