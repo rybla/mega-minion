@@ -1,7 +1,12 @@
+/**
+ * Validate the project with static checks.
+ */
+
 import { spawn, spawnSync } from "bun";
 
 {
     console.log("Typechecking project...");
+
     const typecheckResult = spawnSync(
         ["bun", "run", "typecheck"],
         { stderr: "inherit", "stdout": "inherit" }
@@ -15,6 +20,7 @@ import { spawn, spawnSync } from "bun";
 
 {
     console.log("Linting project...");
+
     const lintResult = spawnSync(
         ["bun", "run", "lint"],
         { stderr: "inherit", "stdout": "inherit" }
@@ -28,6 +34,7 @@ import { spawn, spawnSync } from "bun";
 
 {
     console.log("Starting dev server...");
+
     const devServer = spawn(
         ["bun", "run", "dev"],
         { stderr: "pipe", stdout: "inherit", }
@@ -48,4 +55,20 @@ import { spawn, spawnSync } from "bun";
     console.log("Dev server terminated");
 }
 
+{
+    console.log("Running tests...");
+
+    const testResult = spawnSync(
+        ["bun", "test"],
+        { stderr: "inherit", "stdout": "inherit" }
+    );
+    if (testResult.exitCode !== 0) {
+        console.error("Tests failed");
+        process.exit(1);
+    }
+
+    console.log("Tests passed");
+}
+
 console.log("Validation complete. All checks passed.");
+
