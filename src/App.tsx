@@ -37,8 +37,17 @@ export function App() {
     const audio = audioRef.current;
     const ad = ads[currentIndex];
     if (!audio || !ad) return;
-    audio.src = `/assets/${encodeURIComponent(ad.label)}.mp3`;
-    audio.play().catch(() => {});
+    const src = `/assets/${encodeURIComponent(ad.label)}.mp3`;
+    audio.src = src;
+    const tryPlay = () => audio.play().catch(() => {});
+    // New src loads asynchronously; wait for it to be ready before playing
+    if (audio.readyState >= 3) {
+      tryPlay();
+    } else {
+      const onCanPlay = () => tryPlay();
+      audio.addEventListener("canplay", onCanPlay, { once: true });
+      return () => audio.removeEventListener("canplay", onCanPlay);
+    }
   }, [ads, currentIndex]);
 
   if (!productName) {
