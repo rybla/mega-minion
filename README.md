@@ -1,21 +1,9 @@
-# bun-react-template
+# mega-minion
 
-To install dependencies:
+To install dependencies: `bun install`.
 
-```bash
-bun install
-```
+To start a development server: `bun dev`.
 
-To start a development server:
+## Development
 
-```bash
-bun dev
-```
-
-To run for production:
-
-```bash
-bun start
-```
-
-This project was created using `bun init` in bun v1.3.8. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+To run validation script: `bun run validate`. This validation must pass before changes can be submitted.
